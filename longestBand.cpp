@@ -18,16 +18,14 @@ int findLongestBand(vector<int> &nums) {
         if ( s.find(prev) != s.end() ) {
             continue;
         }
-
-        int next = n + 1;
-        if ( s.find(next) != s.end() ) {
-            int band = 2;
-            next++;
+        else {
+            int band = 1;
+            int next = n + 1;
             while ( s.find(next) != s.end() ) {
                 band++;
                 next++;
             }
-            max_band = max(band, max_band);
+            max_band = max(max_band, band);
         }
     }
 
