@@ -41,6 +41,17 @@ void insertAtMiddle(Node* head, int data, int pos) {
 
 }
 
+void insertAtHead(Node* &head, int data) {
+    if (head == NULL) {
+        head->next = new Node(data);
+        return ;
+    }
+
+    Node* temp = head;
+    head = new Node(data);
+    head->next = temp;
+}
+
 void printList(Node* head) {
     Node* temp = head;
 
@@ -60,6 +71,8 @@ int main(void) {
 
     printList(head);
     insertAtMiddle(head, 10, 4);
+    printList(head);
+    insertAtHead(head, 13);
     printList(head);
 
     return 0;
