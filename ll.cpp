@@ -52,6 +52,17 @@ void insertAtHead(Node* &head, int data) {
     head->next = temp;
 }
 
+Node* midPoint(Node* head) {
+    Node* slow = head;
+    Node* fast = head->next;
+
+    while (fast != NULL && fast->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
 void printList(Node* head) {
     Node* temp = head;
 
@@ -74,6 +85,7 @@ int main(void) {
     printList(head);
     insertAtHead(head, 13);
     printList(head);
+    cout << "Midpoint: " << midPoint(head)->data << endl;
 
     return 0;
 }
