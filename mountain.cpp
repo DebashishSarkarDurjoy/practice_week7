@@ -7,11 +7,10 @@ int findMountainLength(vector<int> &nums) {
     int length = 0;
 
     int n = nums.size();
-    for (int i = 1; i <= n - 2; i++) {
-        int count = 0;
+    for (int i = 1; i <= n - 2;) {
         if ( (nums[i] > nums[i-1]) && (nums[i] > nums[i+1]) ) {
             int j = i;
-            count = 1;
+            int count = 1;
             while (j >= 1 && nums[j] > nums[j-1] ) {
                 j--;
                 count++;
@@ -21,8 +20,11 @@ int findMountainLength(vector<int> &nums) {
                 count++;
                 k++;
             }
+            i = k;
+            length = max(length, count);
         }
-        length = max(length, count);
+        else i++;
+        
     }
 
     return length;
