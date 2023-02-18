@@ -52,6 +52,21 @@ void insertAtHead(Node* &head, int data) {
     head->next = temp;
 }
 
+Node* reverse(Node* &head) {
+    Node* prev = NULL;
+    Node* current = head;
+    Node* next = current;
+
+    while (next != NULL) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+    }
+    head = prev;
+    return head;
+}
+
 Node* midPoint(Node* head) {
     Node* slow = head;
     Node* fast = head->next;
@@ -86,6 +101,8 @@ int main(void) {
     insertAtHead(head, 13);
     printList(head);
     cout << "Midpoint: " << midPoint(head)->data << endl;
+    reverse(head);
+    printList(head);
 
     return 0;
 }
