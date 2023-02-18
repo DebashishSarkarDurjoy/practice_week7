@@ -67,6 +67,17 @@ Node* reverse(Node* &head) {
     return head;
 }
 
+Node* recReverse(Node* node) {
+    if (node == NULL || node->next == NULL) return node;
+
+    Node* sHead = recReverse(node->next);
+
+    node->next->next = node;
+    node->next = NULL;
+
+    return sHead;
+}
+
 Node* midPoint(Node* head) {
     Node* slow = head;
     Node* fast = head->next;
@@ -102,6 +113,8 @@ int main(void) {
     printList(head);
     cout << "Midpoint: " << midPoint(head)->data << endl;
     reverse(head);
+    printList(head);
+    head = recReverse(head);
     printList(head);
 
     return 0;
