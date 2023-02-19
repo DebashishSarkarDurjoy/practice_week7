@@ -43,7 +43,7 @@ void insertAtMiddle(Node* head, int data, int pos) {
 
 void insertAtHead(Node* &head, int data) {
     if (head == NULL) {
-        head->next = new Node(data);
+        head = new Node(data);
         return ;
     }
 
@@ -120,6 +120,23 @@ Node* kReverse(Node* node, int k) {
     return prev;
 }
 
+Node* merge(Node* a, Node* b) {
+    if (a == NULL) return b;
+    if (b == NULL) return a;
+
+    Node* temp = NULL;
+    if (a->data < b->data) {
+        temp = a;
+        temp->next = merge(a->next, b);
+    } 
+    else {
+        temp = b;
+        temp->next = merge(a, b->next);
+    }
+
+    return temp;
+}
+
 int main(void) {
     Node* head = NULL;
 
@@ -140,5 +157,30 @@ int main(void) {
     head = kReverse(head, 3);
     printList(head);
 
+    cout << endl;
+
+    Node* a = NULL;
+    cout << "a: " << endl;
+    insertAtHead(a, 10);
+    insertAtHead(a, 7);
+    insertAtHead(a, 5);
+    insertAtHead(a, 1);
+    insertAtHead(a, 17);
+    insertAtHead(a, 2);
+    insertAtHead(a, 14);
+    printList(a);
+    cout << endl;
+
+    Node* b = NULL;
+    cout << "b: " << endl;
+    insertAtHead(b, 6);
+    insertAtHead(b, 3);
+    insertAtHead(b, 2);
+    printList(b);
+    cout << endl;
+
+    cout << "Merged: " << endl;
+    a = merge(a, b);
+    printList(a);
     return 0;
 }
