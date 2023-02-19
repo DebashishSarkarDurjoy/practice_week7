@@ -99,6 +99,27 @@ void printList(Node* head) {
     cout << endl;
 }
 
+Node* kReverse(Node* node, int k) {
+    if (node == NULL) return NULL;
+
+    Node* current = node;
+    Node* next = node;
+    Node* prev = NULL;
+
+    int cnt = 1;
+    while (current != NULL && cnt <= k) {
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+        cnt++;
+    }
+
+    if (next != NULL) node->next = kReverse(next, k);
+
+    return prev;
+}
+
 int main(void) {
     Node* head = NULL;
 
@@ -115,6 +136,8 @@ int main(void) {
     reverse(head);
     printList(head);
     head = recReverse(head);
+    printList(head);
+    head = kReverse(head, 3);
     printList(head);
 
     return 0;
